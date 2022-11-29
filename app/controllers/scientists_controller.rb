@@ -16,9 +16,15 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid
     end
 
     def update
+        scientist = Scientist.find(params[:id])
+        scientist.update!(scientist_params)
+        render json: scientist, status: :accepted
     end
 
     def destroy
+        scientist = Scientist.find(params[:id])
+        scientist.destroy
+        render json: {}, status: :ok
     end
 
     private
